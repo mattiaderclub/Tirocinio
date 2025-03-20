@@ -18,13 +18,18 @@ def prepare_data(input_path: str, output_path: str):
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser("fl-ids")
+    parser = ArgumentParser("parser")
 
-    parser.register_subcommands(
-        "prepare",
-        ["--input", "--output"],
-        ["The input path for the data.", "The output path for the prepared data."],
+    parser.register_subcommand(
+        subcommand="prepare",
+        arguments=["--input", "--output"],
+        helps=[
+            "The input path for the data.",
+            "The output path for the prepared data.",
+        ],
+        defaults=["resources/datasets/dataset.csv", None],
     )
+
     args = parser.parse_arguments(sys.argv[1:])
 
     if args.subcommand == "prepare":
